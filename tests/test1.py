@@ -1,7 +1,7 @@
-import unittest
+import unittest, sys
 from selenium import webdriver
-
 from selenium.webdriver.common.by import By
+
 class GoogleTestCase(unittest.TestCase):
 
     def setUp(self):
