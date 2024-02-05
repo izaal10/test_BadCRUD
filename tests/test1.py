@@ -1,4 +1,5 @@
 import unittest
+import sys
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -10,7 +11,7 @@ class LoginTestCase(unittest.TestCase):
 
     def setUp(self):
         # Ensure that the page is loaded before each test
-        self.driver.get("http://localhost/login.php")
+        self.driver.get(sys.argv[1])  # Use the URL passed as a command-line argument
 
     def test_valid_login(self):
         self.login("admin", "admin")
