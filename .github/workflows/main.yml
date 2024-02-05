@@ -43,7 +43,7 @@ jobs:
         run: pip install -U selenium
 
       - name: Run Test2
-        run: python tests/test1.py http://172.17.0.1
+        run: python3 tests/test1.py http://172.17.0.1
 
       - name: stop docker
         run: docker stop docker-apache
