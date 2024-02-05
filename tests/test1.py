@@ -1,5 +1,5 @@
 import unittest
-import sys
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -11,11 +11,15 @@ class LoginTestCase(unittest.TestCase):
 
     def setUp(self):
         # Ensure that the page is loaded before each test
-        self.driver.get(sys.argv[1])  # Use the URL passed as a command-line argument
+        url = os.environ.get("URL")  # Retrieve the URL from environment variables
+        if not url:
+            raise ValueError("URL not provided in environment variables")
+        self.driver.get(url)
 
     def test_valid_login(self):
         self.login("admin", "admin")
-        self.assertIn("http://localhost/index.php", self.driver.current_url)
+        expected_url = os.environ.get("EXPECTED_URL", "http://localhost/index.php")
+        self.assertIn(expected_url, self.driver.current_url)
 
     @classmethod
     def tearDownClass(cls):
