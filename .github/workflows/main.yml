@@ -2,7 +2,7 @@ name: OTF Testing
 on:
   push:
     branches:
-      -main
+      - main
 jobs:
   test:
     name: Functional Test
