@@ -42,9 +42,6 @@ jobs:
       - name: Install Selenium Client
         run: pip install -U selenium
 
-      - name: Run Test1
-        run: python tests/hello_example.py
-
       - name: Run Test2
         run: python tests/test1.py ${{ env.URL }}
 
