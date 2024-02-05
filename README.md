@@ -1,4 +1,4 @@
 # Just Bad CRUD App
 
-user : admin\
-pass : nimda666!
+user : admin
+pass : admin
