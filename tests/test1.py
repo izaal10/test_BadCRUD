@@ -44,7 +44,7 @@ class GoogleTestCase(unittest.TestCase):
 
         # Check if the login was successful
         expected_result = "Welcome, admin"
-        actual_result = self.browser.find_element(By.XPATH, '//h1[text()="Welcome, admin"]')
+        actual_result = self.browser.find_element(By.XPATH, '//h2[text()="Welcome, admin"]')
         
         self.assertIn(expected_result, actual_result.text)
 
