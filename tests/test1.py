@@ -42,11 +42,12 @@ class GoogleTestCase(unittest.TestCase):
         # Click the Sign in button
         self.browser.find_element(By.XPATH, '//button[text()="Sign in"]').click()
 
-        # Check if the login was successful
-        expected_result = "Welcome, admin"
-        actual_result = self.browser.find_element(By.XPATH, '//h2[text()="Welcome, admin"]')
-        
-        self.assertIn(expected_result, actual_result.text)
+        # Check if the login was successful and the index.php page is displayed
+        welcome_message = self.browser.find_element(By.XPATH, '//h2[contains(text(),"Halo, admin")]')
+        self.assertTrue(welcome_message.is_displayed())
+
+        table_header = self.browser.find_element(By.XPATH, '//th[text()="Name"]')
+        self.assertTrue(table_header.is_displayed())
 
 if __name__ == '__main__':
     unittest.main(argv=['first-arg-is-ignored'],verbosity=2,warnings='ignore')
