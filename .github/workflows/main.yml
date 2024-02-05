@@ -1,13 +1,16 @@
 name: OTF Testing
+
 on:
   push:
     branches:
       - main
+
 jobs:
   test:
     name: Functional Test
     permissions: write-all
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v4
@@ -26,7 +29,6 @@ jobs:
           URL=http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1)
           echo "URL=$URL" >> $GITHUB_ENV
 
-
       - name: Check AUT URL
         run: curl ${{ env.URL }}
 
@@ -42,8 +44,8 @@ jobs:
       - name: Install Selenium Client
         run: pip install -U selenium
 
-      - name: Run Test2
-        run: python3 tests/test1.py http://172.17.0.1
+      - name: Run Selenium Test
+        run: python tests/test1.py ${{ env.URL }}
 
       - name: stop docker
         run: docker stop docker-apache
