@@ -14,8 +14,8 @@ class LoginTest(unittest.TestCase):
         self.addCleanup(self.browser.quit)
 
     def test_valid_login(self):
-    self.login("admin", "admin")
-    self.assertIn("http://localhost:4444/index.php", self.browser.current_url)
+        self.login("admin", "admin")
+        self.assertIn("http://localhost:4444/index.php", self.browser.current_url)
 
 
 if __name__ == '__main__':
