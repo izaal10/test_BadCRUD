@@ -38,7 +38,7 @@ class GoogleTestCase(unittest.TestCase):
         self.browser.find_element(By.ID, 'inputPassword').send_keys("admin")
 
         # Click the Sign in button
-        self.browser.find_element(By.XPATH, '//button[text()="Sign in"]').click()
+        self.browser.find_element(By.TAG_NAME, 'button"]').click()
 
     
 
