@@ -20,5 +20,5 @@ class GoogleTestCase(unittest.TestCase):
 
         print(element.text)
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     unittest.main(verbosity=2, warnings='ignore')
