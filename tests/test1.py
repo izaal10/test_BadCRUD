@@ -24,14 +24,8 @@ class GoogleTestCase(unittest.TestCase):
         self.assertIn(expected_result, actual_result.text)
 
     def test_login_with_admin_credentials(self):
-        # Get the URL from the command line arguments or use a default
-        if len(sys.argv) > 1:
-            url = sys.argv[1]
-        else:
-            url = "http://localhost"
-
         # Navigate to the login page
-        self.browser.get(url + "/login.php")
+        self.browser.get("http://localhost/login.php")
 
         # Input admin credentials
         self.browser.find_element(By.ID, 'inputUsername').send_keys("admin")
@@ -43,4 +37,4 @@ class GoogleTestCase(unittest.TestCase):
     
 
 if __name__ == '__main__':
-    unittest.main(argv=['first-arg-is-ignored'],verbosity=2,warnings='ignore')
+    unittest.main(verbosity=2,warnings='ignore')
