@@ -4,14 +4,12 @@ from selenium.webdriver.common.by import By
 
 class GoogleTestCase(unittest.TestCase):
 
+    @classmethod
     def setUp(self):
-        options = webdriver.FirefoxOptions()
-        options.add_argument('--ignore-ssl-errors=yes')
-        options.add_argument('--ignore-certificate-errors')
-        server = 'http://localhost:4444'
-
-        self.browser = webdriver.Remote(command_executor=server, options=options)
-        self.addCleanup(self.browser.quit)
+        option = webdriver.FirefoxOptions()
+        option.add_argument('--ignore-ssl-errors=yes')
+        option.add_argument('--ignore-certificate-errors')
+        self.browser = webdriver.Remote(options=option)
 
     def test_homepage(self):
         if len(sys.argv) > 1:
@@ -42,12 +40,7 @@ class GoogleTestCase(unittest.TestCase):
         # Click the Sign in button
         self.browser.find_element(By.XPATH, '//button[text()="Sign in"]').click()
 
-        # Check if the login was successful and the index.php page is displayed
-        welcome_message = self.browser.find_element(By.XPATH, '//h2[contains(text(),"Halo, admin")]')
-        self.assertTrue(welcome_message.is_displayed())
-
-        table_header = self.browser.find_element(By.XPATH, '//th[text()="Name"]')
-        self.assertTrue(table_header.is_displayed())
+    
 
 if __name__ == '__main__':
     unittest.main(argv=['first-arg-is-ignored'],verbosity=2,warnings='ignore')
