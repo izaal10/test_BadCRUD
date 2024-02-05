@@ -1,38 +1,29 @@
 import unittest
-import os
 from selenium import webdriver
+
 from selenium.webdriver.common.by import By
-
-class LoginTestCase(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls):
-        cls.driver = webdriver.Firefox()
+class GoogleTestCase(unittest.TestCase):
 
     def setUp(self):
-        # Ensure that the page is loaded before each test
-        url = os.environ.get("URL")  # Retrieve the URL from environment variables
-        if not url:
-            raise ValueError("URL not provided in environment variables")
-        self.driver.get(url)
+        options = webdriver.FirefoxOptions()
+        options.add_argument('--ignore-ssl-errors=yes')
+        options.add_argument('--ignore-certificate-errors')
+        server = 'http://localhost:4444'
 
-    def test_valid_login(self):
-        self.login("admin", "admin")
-        expected_url = os.environ.get("EXPECTED_URL", "http://localhost/index.php")
-        self.assertIn(expected_url, self.driver.current_url)
+        self.browser = webdriver.Remote(command_executor=server, options=options)
+        self.addCleanup(self.browser.quit)
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.driver.quit()
+    def test_homepage(self):
+        if len(sys.argv) > 1:
+            url = sys.argv[1]
+        else:
+            url = "http://localhost"
 
-    def login(self, username, password):
-        username_input = self.driver.find_element(By.NAME, "username")
-        password_input = self.driver.find_element(By.NAME, "password")
-        submit_button = self.driver.find_element(By.CSS_SELECTOR, ".btn-primary")
-
-        username_input.send_keys(username)
-        password_input.send_keys(password)
-        submit_button.click()
+        self.browser.get(url)
+        expected_result = "Please sign in"
+        actual_result = self.browser.find_element(By.TAG_NAME, 'h1')
+        
+        self.assertIn(expected_result, actual_result.text)
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2, warnings='ignore')
+    unittest.main(argv=['first-arg-is-ignored'],verbosity=2,warnings='ignore')

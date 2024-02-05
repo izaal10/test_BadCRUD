@@ -44,7 +44,7 @@ jobs:
       - name: Install Selenium Client
         run: pip install -U selenium
 
-      - name: Run Selenium Test
+      - name: Run Test
         run: python tests/test1.py ${{ env.URL }}
 
       - name: stop docker
