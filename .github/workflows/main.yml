@@ -41,5 +41,8 @@ jobs:
       - name: Install Selenium client
         run: pip install -U selenium pytest pytest-xdist
 
+      - name: Run tests
+        run: pytest tests/test1.py
+
       - name: stop docker
         run: docker stop docker-apache
